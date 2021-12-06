@@ -1,7 +1,8 @@
-package com.achang.netty.simple;
+package com.achang.netty.tcp;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -31,6 +32,18 @@ public class NettyClient {
             System.out.println("【客户端】准备完毕....");
             //指定客户端连接的服务器地址
             ChannelFuture cf = bootstrap.connect("127.0.0.1", 6668).sync();
+
+            cf.addListener(new ChannelFutureListener() {
+                public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                    if (channelFuture.isSuccess()){
+                        System.out.println("监听6668端口成功");
+                    }else {
+                        System.out.println("监听6668端口失败");
+                    }
+                }
+            });
+
+
             //对关闭通道进行监听
             cf.channel().closeFuture().sync();
         } finally {

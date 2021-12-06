@@ -1,4 +1,4 @@
-package com.achang.netty.simple;
+package com.achang.netty.tcp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

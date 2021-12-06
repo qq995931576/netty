@@ -1,13 +1,11 @@
-package com.achang.netty.simple;
+package com.achang.netty.tcp;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
+import java.util.concurrent.TimeUnit;
 
 /******
  @author 阿昌
@@ -23,13 +21,40 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("server ctx:"+ctx);
 
-        //将msg转为ByteBuffer（这个ByteBuf和nio的ByteBuffer是有区别的）
-        ByteBuf buf=(ByteBuf)msg;
+        //用户程序自定义的普通任务，taskQueue自定义异步任务
+        ctx.channel().eventLoop().execute(new Runnable() {
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("阿昌来也1!!!");
+            }
+        });
 
-        System.out.println("客户端发送消息是："+buf.toString(CharsetUtil.UTF_8));
-        System.out.println("客户端地址为："+ctx.channel().remoteAddress());
+        //用户自定义定时任务--->该任务提交到scheduledTaskQueue中
+        ctx.channel().eventLoop().schedule(new Runnable() {
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("阿昌来也2!!!");
+            }
+        },2, TimeUnit.SECONDS);//两秒后执行
+
+
+
+//        System.out.println("server ctx:"+ctx);
+//
+//        //将msg转为ByteBuffer（这个ByteBuf和nio的ByteBuffer是有区别的）
+//        ByteBuf buf=(ByteBuf)msg;
+//
+//        System.out.println("客户端发送消息是："+buf.toString(CharsetUtil.UTF_8));
+//        System.out.println("客户端地址为："+ctx.channel().remoteAddress());
     }
 
 
