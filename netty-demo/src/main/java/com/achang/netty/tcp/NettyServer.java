@@ -10,6 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  @author 阿昌
  @create 2021-12-05 19:49
  ******* netty服务器
+ *  模拟tcp长连接
  */
 public class NettyServer {
     public static void main(String[] args) throws InterruptedException {

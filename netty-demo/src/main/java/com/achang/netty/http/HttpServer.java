@@ -10,6 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  @author 阿昌
  @create 2021-12-06 22:05
  *******
+ *  模拟http请求连接
  */
 public class HttpServer {
     public static void main(String[] args) throws Exception {
