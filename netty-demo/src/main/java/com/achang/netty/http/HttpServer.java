@@ -25,7 +25,7 @@ public class HttpServer {
                     .childHandler(new ServerInitializer());
             System.out.println("服务器启动成功....");
 
-            ChannelFuture channelFuture = bootstrap.bind(7000).sync();
+            ChannelFuture channelFuture = bootstrap.bind(7001).sync();
             channelFuture.channel().closeFuture().sync();
         }finally {
             workGroup.shutdownGracefully();

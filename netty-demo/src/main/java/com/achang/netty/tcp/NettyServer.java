@@ -22,7 +22,7 @@ public class NettyServer {
                 WorkerGroup： 处理和客户端业务处理
             3、两个现场组都是自旋
          */
-        EventLoopGroup boosGroup = new NioEventLoopGroup();
+        EventLoopGroup boosGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             //创建服务器端启动的对象，配置启动参数

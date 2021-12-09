@@ -25,10 +25,10 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
             //自定义不做响应uri
             String uri = ((HttpRequest) msg).uri();
-           if ("/favicon.ico".equals(uri)){
-               System.out.println("对/favicon.ico特定资源进行不做响应");
-               return;
-           }
+//           if ("/favicon.ico".equals(uri)){
+//               System.out.println("对/favicon.ico特定资源进行不做响应");
+//               return;
+//           }
 
             //回复信息给客户端浏览器[http协议]
             ByteBuf content = Unpooled.copiedBuffer("hello,我是阿昌的服务器", CharsetUtil.UTF_8);
